@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
 </head>
-<body>
-    <table id="app" class="table">
+<body><div id="app">
+    <table class="table">
         <tr>
             <th class="text-right" v-on:click="sortBy('id')">序号</th>
             <th class="text-right" v-on:click="sortBy('name')">书名</th>
@@ -36,27 +36,27 @@
 
         </tr>
     </table>
-    <div id="add-book">
-        <legend>添加书籍</legend>
-        <div class="form-group">
-            <label for="">书名</label>
-            <input type="text" class="form-control" v-model="book.name">
-        </div>
-        <div class="form-group">
-            <label for="">作者</label>
-            <input type="text" class="form-control" v-model="book.author">
-        </div>
-        <div class="form-group">
-            <label for="">价格</label>
-            <input type="text" class="form-control" v-model="book.price">
-        </div>
-        <button class="btn btn-primary btn-block" v-on:click="addBook()">添加</button>
+
+    <legend>添加书籍</legend>
+    <div class="form-group">
+        <label for="">书名</label>
+        <input type="text" class="form-control" v-model="book.name">
     </div>
+    <div class="form-group">
+        <label for="">作者</label>
+        <input type="text" class="form-control" v-model="book.author">
+    </div>
+    <div class="form-group">
+        <label for="">价格</label>
+        <input type="text" class="form-control" v-model="book.price">
+    </div>
+    <button class="btn btn-primary btn-block" v-on:click="addBook()">添加</button>
+</div>
     <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 
     <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="~/Scripts/vue-2.1.8.js"></script>
-
+    @*<script src="~/Scripts/vue-1.0.26.js"></script>*@
     <script>
         $(function () {
           
@@ -98,14 +98,25 @@
                         this.sortparam = sortparam;
                     },
                     addBook: function () {
+                        
                         //计算书的id
                         this.book.id = this.books.length + 1;
                         this.books.push(this.book);
                         //将input中的数据重置
-                        this.book = '';
+                        this.book =  {
+                            id: 0,
+                            author: '',
+                            name: '',
+                            price: ''
+                    
+}
+                        //this.book.push(this.book);
+                        //// 添加完newPerson对象后，重置newPerson对象
+                        //this.newPerson = { name: '', age: 0, sex: 'Male' }
                     },
                     delBook: function (book) {
-                        this.books.$remove(book);
+                     //   this.books.$remove(book);
+                        this.books.splice(book, 1);
                     }
                 },
 
