@@ -23,5 +23,15 @@ namespace Vue_Framework.Controllers
         {
             return View();
         }
+
+        public ActionResult List1()
+        {
+            return View();
+        }
+
+        public ActionResult ELM()
+        {
+            return View();
+        }
     }
 }

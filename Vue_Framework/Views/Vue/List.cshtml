@@ -55,7 +55,8 @@
     <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 
     <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="~/Scripts/vue-2.1.8.js"></script>
+<script src="http://vuejs.org/js/vue.js"></script>
+    @*<script src="~/Scripts/vue-2.1.8.js"></script>*@
     @*<script src="~/Scripts/vue-1.0.26.js"></script>*@
     <script>
         $(function () {
@@ -81,7 +82,7 @@
                             name: '水浒传',
                             price: 30.0
                         }, {
-                            id: '3',
+                            id: 3,
                             author: '罗贯中',
                             name: '三国演义',
                             price: 24.0
@@ -115,6 +116,7 @@
                         //this.newPerson = { name: '', age: 0, sex: 'Male' }
                     },
                     delBook: function (book) {
+                        console.log(book.id)
                      //   this.books.$remove(book);
                         this.books.splice(book, 1);
                     }
