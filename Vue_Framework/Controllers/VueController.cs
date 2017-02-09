@@ -33,5 +33,10 @@ namespace Vue_Framework.Controllers
         {
             return View();
         }
+
+        public ActionResult Get()
+        {
+            return View();
+        }
     }
 }

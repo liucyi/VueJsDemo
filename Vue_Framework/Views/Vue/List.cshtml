@@ -26,10 +26,10 @@
             <td class="text-right">{{book.author}}</td>
             <td class="text-right">{{book.price}}</td>
             <td class="text-right" v-if="book.id%2==0">
-                <button type="button" class="btn btn-success" v-on:click="delBook(book)">删除</button>
+                <button type="button" class="btn btn-success" v-on:click="delBook(index)">删除</button>
             </td>
             <td class="text-right" v-else>
-                <button type="button" class="btn btn-danger" v-on:click="delBook(book)">删除</button>
+                <button type="button" class="btn btn-danger" v-on:click="delBook(index)">删除</button>
             </td>
 
 
@@ -55,8 +55,8 @@
     <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 
     <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="http://vuejs.org/js/vue.js"></script>
-    @*<script src="~/Scripts/vue-2.1.8.js"></script>*@
+@*<script src="http://vuejs.org/js/vue.js"></script>*@
+    <script src="~/Scripts/vue-2.1.8.js"></script>
     @*<script src="~/Scripts/vue-1.0.26.js"></script>*@
     <script>
         $(function () {
@@ -115,10 +115,10 @@
                         //// 添加完newPerson对象后，重置newPerson对象
                         //this.newPerson = { name: '', age: 0, sex: 'Male' }
                     },
-                    delBook: function (book) {
-                        console.log(book.id)
+                    delBook: function (index) {
+                        console.log(index.id)
                      //   this.books.$remove(book);
-                        this.books.splice(book, 1);
+                        this.books.splice(index, 1);
                     }
                 },
 

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Vue_Core.Data;
+using Vue_Core.Entity;
 using Vue_Core.Models;
 using Vue_Core.Services;
 
@@ -51,6 +52,10 @@ namespace Vue_Core
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=NewDb;Trusted_Connection=True;";
+            services.AddDbContext<DataContext>(options => options.UseSqlite(connection));
+
 
             services.AddMvc();
 
