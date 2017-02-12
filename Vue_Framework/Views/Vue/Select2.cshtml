@@ -1,0 +1,160 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+
+
+
+
+
+
+
+
+
+
+    <script type="text/javascript" src="/js/lib/dummy.js"></script>
+
+
+
+
+
+
+
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+
+
+
+    <script type="text/javascript" src="https://unpkg.com/jquery@3.1.1"></script>
+
+
+
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/select2@4.0.3/dist/css/select2.min.css">
+
+
+
+    <script type="text/javascript" src="https://unpkg.com/select2@4.0.3"></script>
+
+
+
+    <script type="text/javascript" src="https://unpkg.com/vue@latest/dist/vue.js"></script>
+
+
+
+    <style type="text/css">
+        html,
+        body {
+            font: 13px/18px sans-serif;
+        }
+
+        select {
+            min-width: 300px;
+        }
+    </style>
+
+    <title> by yyx990803</title>
+
+
+
+
+
+
+
+    <script type='text/javascript'>
+        //<![CDATA[
+        window.onload = function() {
+                Vue.component('select2', {
+                    props: ['options', 'value'],
+                    template: '#select2-template',
+                    mounted: function() {
+                        var vm = this
+                        $(this.$el)
+                            .val(this.value)
+                            // init select2
+                            .select2({
+                                data: this.options
+                            })
+                            // emit event on change.
+                            .on('change', function() {
+                                vm.$emit('input', this.value)
+                            })
+                    },
+                    watch: {
+                        value: function(value) {
+                            // update value
+                            $(this.$el).val(value)
+                        },
+                        options: function(options) {
+                            // update options
+                            $(this.$el).select2({
+                                data: options
+                            })
+                        }
+                    },
+                    destroyed: function() {
+                        $(this.$el).off().select2('destroy')
+                    }
+                })
+
+                var vm = new Vue({
+                    el: '#el',
+                    template: '#demo-template',
+                    data: {
+                        selected: 0,
+                        options: [{
+                            id: 1,
+                            text: 'Hello'
+                        }, {
+                            id: 2,
+                            text: 'World'
+                        }]
+                    }
+                })
+            } //]]>
+    </script>
+
+
+</head>
+
+<body>
+    <div id="el"></div>
+
+    <!-- using string template here to work around HTML <option> placement restriction -->
+    <script type="text/x-template" id="demo-template">
+        <div>
+            <p>Selected: {{ selected }}</p>
+            <select2 :options="options" v-model="selected">
+                <option disabled value="0">Select one</option>
+            </select2>
+        </div>
+    </script>
+
+    <script type="text/x-template" id="select2-template">
+        <select>
+            <slot></slot>
+        </select>
+    </script>
+
+    <script>
+        // tell the embed parent frame the height of the content
+        if (window.parent && window.parent.parent) {
+            window.parent.parent.postMessage(["resultsFrame", {
+                height: document.body.getBoundingClientRect().height,
+                slug: "fruqrvdL"
+            }], "*")
+        }
+    </script>
+
+</body>
+
+</html>
+

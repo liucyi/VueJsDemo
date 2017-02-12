@@ -38,5 +38,15 @@ namespace Vue_Framework.Controllers
         {
             return View();
         }
+
+        public ActionResult Select2()
+        {
+            return View();
+        }
+
+        public ActionResult Table()
+        {
+            return View();
+        }
     }
 }

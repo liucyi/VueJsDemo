@@ -246,6 +246,8 @@
     <Content Include="Views\Vue\List1.cshtml" />
     <Content Include="Views\Vue\ELM.cshtml" />
     <Content Include="Views\Vue\Get.cshtml" />
+    <Content Include="Views\Vue\Select2.cshtml" />
+    <Content Include="Views\Vue\Table.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
