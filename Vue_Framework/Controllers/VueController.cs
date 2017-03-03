@@ -34,7 +34,7 @@ namespace Vue_Framework.Controllers
             return View();
         }
 
-        public ActionResult Get()
+        public ActionResult resource()
         {
             return View();
         }
@@ -45,6 +45,11 @@ namespace Vue_Framework.Controllers
         }
 
         public ActionResult Table()
+        {
+            return View();
+        }
+
+        public ActionResult axios()
         {
             return View();
         }

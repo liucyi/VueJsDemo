@@ -195,9 +195,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -245,9 +242,10 @@
     <Content Include="Views\Vue\List.cshtml" />
     <Content Include="Views\Vue\List1.cshtml" />
     <Content Include="Views\Vue\ELM.cshtml" />
-    <Content Include="Views\Vue\Get.cshtml" />
+    <Content Include="Views\Vue\resource.cshtml" />
     <Content Include="Views\Vue\Select2.cshtml" />
     <Content Include="Views\Vue\Table.cshtml" />
+    <Content Include="Views\Vue\axios.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
