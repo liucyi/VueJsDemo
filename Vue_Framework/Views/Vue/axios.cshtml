@@ -1,87 +1,84 @@
 ﻿
 @{
     Layout = null;
-}
-
-
-<!DOCTYPE html>
-<html>
-
+}<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Title</title>
+    <script src="vue-v2.0.js"></script>
     <link rel="stylesheet" href="http://211.149.193.19:8090/vue-tutorials/03.Ajax/vue-resource/style.css" />
+    <link href="//cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.css" rel="stylesheet">
+    <style>
+        input {
+            text-indent: 10px;
+        }
+    </style>
 </head>
-
 <body>
-    <div id="app">
-        <div class="container">
-            <simple-grid v-bind:data-list="gridData" v-bind:columns="gridColumns">
-            </simple-grid>
+    <div class="container">
+        <div class="game">
+            <div class="question">
+                <label>
+                    Ask a yes/no question: <input type="text" v-model="question" placeholder="it must contains '?'">
+                </label>
+            </div>
+            <div class="answer">
+                {{answer}}
+            </div>
+            <div>
+                <img v-bind:src="img_res" alt="">
+            </div>
+         
         </div>
+
     </div>
 
-    <template id="grid-template">
-        <table>
-            <thead>
-                <tr>
-                    <th v-for="col in columns">
-                        {{ col }}
-                    </th>
-
-            </thead>
-            <tbody>
-
-                <tr v-for="(index,entry) in dataList">
-                    <td v-for="col in columns">
-                        {{entry[col]}}
-                    </td>
-
-                </tr>
-            </tbody>
-        </table>
-    </template>
-
-
-    @*<script src="~/Scripts/element-ui/vue-1.0.26.js"2222></script>*@
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    @*<script src="~/Scripts/element-ui/vue-2.1.8.js"></script>*@
- 
-    <script>
-        Vue.component('simple-grid', {
-            template: '#grid-template',
-            props: ['dataList', 'columns']
-        })
-    </script>
-    <script>
-
-        var demo = new Vue({
-            el: '#app',
-            data: {
-                //   gridColumns: ['customerId', 'companyName', 'contactName', 'phone'],
-                gridColumns: ['projectNumber', 'projectDate', 'areaId', 'gardenId'],
-                gridData: [],
-              
-                apiUrl: 'http://localhost:1143/api/241/Project'
-            },
-            ready: function () {
-                this.getCustomers();
-            },
-            methods: {
-                getCustomers: function () {
-                    this.$http.get(this.apiUrl)
-                        .then((response) => {
-                            this.$set('gridData', response.data);
-
-                            console.log(response.data)
-                        })
-                        .catch(function (response) {
-                            console.log(response);
-                        });
-                }
-            }
-        })
-    </script>
+     
 </body>
+<script src="https://unpkg.com/axios@0.12.0/dist/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
+<script src="//cdn.bootcss.com/vue/2.1.10/vue.js"></script>
+ 
+<script>
 
+
+    new Vue({
+        el: '.game',
+        data: {
+            img_res: '',
+            question: '',
+            answer: 'I cannot give you an answer until you ask a question!',
+          
+
+        },
+ 
+        methods: {
+        
+            getAnswer: _.debounce(function (val) {
+                var vm = this;
+                if (val.indexOf('?') == -1) {
+                    this.answer = 'Questions usually contain a question mark. ;-)';
+                    return;
+                }
+                this.answer = 'Thinking...';
+                axios.get('https://yesno.wtf/api')
+                        .then(function (response) {
+                            console.log(response);
+                            vm.answer = _.capitalize(response.data.answer);
+                            vm.img_res = response.data.image;
+                        })
+                        .catch(function (error) {
+                            vm.answer = 'Error! Could not reach the API. ' + error
+                        });
+            }, 500)
+        },
+        watch: {
+            question: function (val) {
+                this.answer = 'Waiting for you to stop typing...';
+                this.getAnswer(val);
+            }
+        }
+    })
+</script>
 </html>

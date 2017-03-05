@@ -53,5 +53,9 @@ namespace Vue_Framework.Controllers
         {
             return View();
         }
+        public ActionResult axios_table()
+        {
+            return View();
+        }
     }
 }

@@ -58,20 +58,23 @@
         var demo = new Vue({
             el: '#app',
             data: {
-              //   gridColumns: ['customerId', 'companyName', 'contactName', 'phone'],
-                 gridColumns: ['projectNumber', 'projectDate', 'areaId', 'gardenId'],
+               gridColumns: ['customerId', 'companyName', 'contactName', 'phone'],
+             //    gridColumns: ['projectNumber', 'projectDate', 'areaId', 'gardenId'],
                 gridData: [],
-               //   apiUrl: 'http://211.149.193.19:8080/api/customers'
-                 apiUrl: 'http://localhost:1143/api/241/Project'
+               apiUrl: 'http://211.149.193.19:8080/api/customers'
+               //  apiUrl: 'http://localhost:1143/api/241/Project'
             },
             ready: function () {
+                alert(1);
                 this.getCustomers();
             },
             methods: {
                 getCustomers: function () {
+                    var vm = this;
                     this.$http.get(this.apiUrl)
                         .then((response) => {
-                            this.$set('gridData',  response.data );
+                            vm.gridData = response.data;
+                          //  this.$set('gridData',  response.data );
 
                             console.log(response.data)
                         })

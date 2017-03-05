@@ -1,0 +1,96 @@
+﻿
+@{
+    Layout = null;
+}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+   
+    <link rel="stylesheet" href="http://211.149.193.19:8090/vue-tutorials/03.Ajax/vue-resource/style.css" />
+    <link href="//cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.css" rel="stylesheet">
+    <style>
+        input {
+            text-indent: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="game">
+            <simple-grid v-bind:data-list="gridData" v-bind:columns="gridColumns">
+            </simple-grid>
+
+        </div>
+        <template id="grid-template">
+            <table>
+                <thead>
+                    <tr>
+                        <th v-for="col in columns">
+                            {{ col }}
+                        </th>
+
+                </thead>
+                <tbody>
+                    @*<tr v-for="entry in dataList">*@
+                    <tr v-for="(index,entry) in dataList">
+                        <td v-for="col in columns">
+                            {{entry[col]}}
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </template>
+    </div>
+
+
+</body>
+<script src="https://unpkg.com/axios@0.12.0/dist/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
+<script src="//cdn.bootcss.com/vue/2.1.10/vue.js"></script>
+<script>
+        Vue.component('simple-grid', {
+            template: '#grid-template',
+            props: ['dataList', 'columns']
+        })
+</script>
+<script>
+
+
+    new Vue({
+        el: '.game',
+        data: {
+            gridColumns: ['customerId', 'companyName', 'contactName', 'phone'],
+            gridData: []
+ 
+        },
+        mounted: function () {
+ 
+            this.getCustomers();
+        },
+        methods: {
+
+            getCustomers: function ( ) {
+                var vm = this;
+             
+               
+                axios.get('http://211.149.193.19:8080/api/customers')
+                        .then(function (response) {
+                            alert(1)
+                            console.log(response.data);
+                        
+                       vm.gridData = response.data;
+                      })
+                        .catch(function (error) {
+                         });
+            } 
+        },
+        watch: {
+            question: function (val) {
+          
+            }
+        }
+    })
+</script>
+</html>
